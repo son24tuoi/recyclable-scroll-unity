@@ -1,38 +1,32 @@
-# Recyclable Scroll - Tái sử dụng phần tử
+# Recyclable Scroll - Reusing UI Elements
 
 <p align="center">
 <img src="Assets/_RecyclableScroll/Images/recyclable-scroll-vertical-gif.gif" width="45%" />
 <img src="Assets/_RecyclableScroll/Images/recyclable-scroll-horizontal-gif.gif" width="45%" />
 </p>
 
-Hệ thống scroll giúp tối ưu hóa hiệu năng bằng cách tái sử dụng các phần tử UI (GameObject). Thay vì khởi tạo hàng ngàn vật phẩm gây tốn bộ nhớ RAM và làm giảm tốc độ xử lý CPU, hệ thống này chỉ duy trì một số lượng nhỏ các phần tử đủ để hiển thị trên màn hình và cập nhật dữ liệu của chúng khi được cuộn.
+### **Key Features**
 
-#### Tính năng chính
+- High Performance: Only creates the minimum number of objects necessary to fill the viewport.
+- Support for large datasets: Can display lists of up to thousands of items without increasing resource consumption.
+- Easy integration: Based on Unity UI’s standard ScrollRect, the source code can be customized to suit individual preferences.
 
-- Hiệu năng cao: Chỉ khởi tạo số lượng Object tối thiểu cần thiết để lấp đầy vùng nhìn (Viewport).
-- Hỗ trợ dữ liệu lớn: Có thể hiển thị danh sách lên đến hàng nghìn mà không làm tăng mức tiêu thụ tài nguyên.
-- Dễ dàng tích hợp: Dựa trên ScrolllRect tiêu chuẩn của Unity UI, có thể tùy chỉnh source code theo ý muốn cá nhân.
+### **Comparison with Traditional Methods**
 
-#### So sánh với truyền thống
-
-| **Tiêu chí** | **Scroll truyền thống** | **Scroll tái sử dụng** |
+| **Criteria** | **Traditional Scroll** | **Reusable Scroll** |
 | --- | --- | --- |
-| **Số lượng Object** | Bằng tổng số lượng data → data càng nhiều - object càng nhiều. | Cố định, thường gấp 2 lần số lượng có thể thấy trong vùng nhìn (viewport). |
-| **Tiêu tốn bộ nhớ RAM** | Tăng dần theo dữ liệu | Thấp và ổn định |
+| **Number of Objects** | Equal to the total amount of data → the more data, the more objects. | Fixed, typically twice the number visible in the viewport. |
+| **RAM usage** | Increases gradually with data | Low and stable |
 
-#### Nguyên lý hoạt động
+### **Operating principle**
 
-- Phân trang: Sử dụng biến `pageIndex` để kiểm soát giới hạn dữ liệu.
-- Dịch chuyển: Khi *Content* đến vùng biên của *Viewport*, nó sẽ được đưa về vị trí thích hợp để có thể cuộn được tiếp (đồng thời cập nhật dữ liệu hiển thị).
+- Pagination: Uses the `pageIndex` variable to control data boundaries.
+- Scrolling: When *content* reaches the edge of the *viewport*, it is moved to the appropriate position to allow further scrolling (while updating the displayed data).
 
-#### Hướng dẫn cài đặt nhanh
+### **Quick Setup Guide**
 
-1. Gắn script `RecyclableScrollVertical.cs`/`RecyclableScrollHorizontal.cs` vào *GameObject* có chứa *ScrollRect* (đặt nơi khác cũng được 😅).
-
-2. Kéo các biến `ScrollRect` và `ContentRT` cho `RecyclableScrollVertical.cs`/`RecyclableScrollHorizontal.cs` trên cửa sổ Inspector. Khai báo số lượng hiển thị danh sách tối đa vào `TotalItems` (hoặc set bằng code). Các biến khác hiện trên Inspector sẽ tự động cập nhật chạy.
-
-3. Cấu hình các UI item trong danh sách làm object con của game object *Content* (nên để số lượng vừa đủ kín vùng nhìn - Viewport).
-
-4. Cấu hình `RecyclableScrollVertical.cs`/`RecyclableScrollHorizontal.cs` bằng hàm `Init()` với tham số là hàm callback cập nhật dữ liệu. Xem script mẫu `ItemLoader.cs` và scene mẫu *Scene_RecyclableScroll* trong *Samples*.
-
-5. Get danh sách các UI item trong *Content* bằng hàm `TryGetComponentsInContentChildren()` . Xem script mẫu `ItemLoader.cs` và scene mẫu *Scene_RecyclableScroll* trong *Samples*.
+1. Attach the`RecyclableScrollVertical.cs` / `RecyclableScrollHorizontal.cs` script to the *GameObject* containing the *ScrollRect* (you can place it elsewhere too 😅).
+2. Drag the`ScrollRect` and `ContentRT` variables for `RecyclableScrollVertical.cs` / `RecyclableScrollHorizontal.cs` onto the Inspector window. Set the maximum number of list items to display in `TotalItems` (or set it via code). Other variables visible in the Inspector will update automatically.
+3. Configure the UI items in the list as child objects of the *Content* game object (make sure the number is just enough to fill the viewport).
+4. Configure `RecyclableScrollVertical.cs` / `RecyclableScrollHorizontal.cs` using the `Init()` function with a callback function as a parameter to update the data. See the sample script `ItemLoader.cs` and the sample scene *Scene_RecyclableScroll* in *Samples*.
+5. Retrieve the list of UI items in*the Content* using the `TryGetComponentsInContentChildren()`  function. See the sample script`ItemLoader.cs`and the sample scene *Scene_RecyclableScroll* in *Samples*.
