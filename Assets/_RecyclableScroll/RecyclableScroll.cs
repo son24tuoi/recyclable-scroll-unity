@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace One.InfiniteScroll
+namespace One.RecyclableScroll
 {
     public class RecyclableScroll : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {

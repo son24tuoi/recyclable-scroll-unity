@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace One.InfiniteScroll.Sample
+namespace One.RecyclableScroll.Sample
 {
     public class Item : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace One.InfiniteScroll.Sample
+namespace One.RecyclableScroll.Sample
 {
     public class ItemLoader : MonoBehaviour
     {
